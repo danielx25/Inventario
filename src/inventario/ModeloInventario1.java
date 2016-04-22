@@ -30,12 +30,12 @@ public class ModeloInventario1 {
 		return Math.sqrt((2*demanda_*cOrdenar_)/cInventario_);
 	}
 	
-	public double costoTotal(double cant, double demanda_, double cOrdenar_, double cInventario_)
+	public double costoTotal(double cant, double demanda_, double cOrdenar_, double cInventario_)//dado una cantidad optima determiar el costo total
 	{
 		return (cant/2)*cInventario_ + (demanda_/cant)*cOrdenar_;
 	}
 	
-	public double costoTotal(double cant)
+	public double costoTotal(double cant)//dado una cantidad determinar el costo total
 	{
 		return (cant/2)*cInventario + (demanda/cant)*cOrdenar;
 	}
