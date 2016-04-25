@@ -12,6 +12,8 @@ public class ModeloInventario1 {
 	private double tasa;
 	
 	
+	private double cparte1, cparte2;
+	
 	public ModeloInventario1(double demanda, double cOrdenar, double cInvetario) {
 		// TODO Auto-generated constructor stub
 		this.demanda = demanda;
@@ -37,7 +39,9 @@ public class ModeloInventario1 {
 	
 	public double costoTotal(double cant)//dado una cantidad determinar el costo total
 	{
-		return (cant/2)*cInventario + (demanda/cant)*cOrdenar;
+		cparte1 = (cant/2)*cInventario;
+		cparte2 = (demanda/cant)*cOrdenar;
+		return cparte1+cparte2;
 	}
 	
 	public void modelo1()
@@ -66,6 +70,15 @@ public class ModeloInventario1 {
 	public double getcuantasVecesPerdir()
 	{
 		return tasa;
+	}
+	
+	public double getCInventario()
+	{
+		return cparte1;
+	}
+	public double getCOrdenar()
+	{
+		return cparte2;
 	}
 
 }

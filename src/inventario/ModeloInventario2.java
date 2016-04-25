@@ -7,6 +7,7 @@ public class ModeloInventario2 {
 	private double cInventario;
 	
 	private double cTotal;
+	private double cantidadOp; //cantidad optima en el inventario
 	
 	private double frecuencia;
 	private double tasa;
@@ -21,8 +22,9 @@ public class ModeloInventario2 {
 		this.cInventario = cInvetario;
 		this.x_L = x_L;
 		modelo1();
-		System.out.println(x_S);
-		System.out.println(cTotal);
+		System.out.println("cantidad optima:         "+cantidadOp);
+		System.out.println("nivel maximo inventario: "+x_S);
+		System.out.println("costo total:             "+cTotal);
 		System.out.println(frecuencia);
 		System.out.println(tasa);
 		System.out.println(costoTotal(150));
@@ -30,13 +32,21 @@ public class ModeloInventario2 {
 	
 	public double cantidadOptima(double x_L_,double demanda_, double cOrdenar_, double cInventario_)
 	{
+		//return Math.sqrt(2*cOrdenar_*demanda_*x_L_)*Math.sqrt((x_L_+cInventario_)/x_L_);
 		return Math.sqrt(Math.pow(x_L_, 2) + (2*cOrdenar_*demanda_)/cInventario_);
+	}
+	
+	public double cantidadOptimaInvetario(double x_L_,double demanda_, double cOrdenar_, double cInventario_)
+	{
+		//return Math.sqrt(2*cOrdenar_*demanda_*x_L_)*Math.sqrt((x_L_+cInventario_)/x_L_);
+		return -x_L_+ Math.sqrt(Math.pow(x_L_, 2) + (2*cOrdenar_*demanda_)/cInventario_);
 	}
 	
 	
 	public double costoTotal(double x_L_, double x_S_, double demanda_, double cOrdenar_, double cInventario_)
 	{
-		return (cOrdenar_*demanda_)/(x_S_+x_L_)+ (cInventario_*Math.pow(x_S_, 2)/2*(x_L_+x_S_));
+		//return Math.sqrt(2*cOrdenar_*demanda_*x_L_) * Math.sqrt(cInventario_/(cInventario_+x_L_));
+		return (cOrdenar_*demanda_)/(x_S_+x_L_)+ cInventario_*Math.pow(x_S_, 2)/(2*(x_L_+x_S_));
 	}
 	
 	public double costoTotal(double cant)
@@ -47,7 +57,8 @@ public class ModeloInventario2 {
 	
 	public void modelo1()
 	{
-		x_S = cantidadOptima(x_L,demanda, cOrdenar, cInventario);
+		cantidadOp = cantidadOptima(x_L,demanda, cOrdenar, cInventario);
+		x_S = cantidadOptimaInvetario(x_L, demanda, cOrdenar, cInventario);
 		cTotal =  costoTotal(x_L, x_S, demanda, cOrdenar, cInventario);
 		frecuencia = x_S/demanda;
 		tasa = demanda/x_S;
