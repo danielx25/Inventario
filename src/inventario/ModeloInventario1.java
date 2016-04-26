@@ -20,10 +20,10 @@ public class ModeloInventario1 {
 		this.cOrdenar = cOrdenar;
 		this.cInventario = cInvetario;
 		modelo1();
-		System.out.println(cantidadOp);
-		System.out.println(cTotal);
-		System.out.println(frecuencia);
-		System.out.println(tasa);
+		System.out.println("cantidad optima: "+cantidadOp);
+		System.out.println("costo total:     "+cTotal);
+		System.out.println("frecuencia:      "+frecuencia);
+		System.out.println("tasa:            "+tasa);
 		System.out.println(costoTotal(150));
 	}
 	
