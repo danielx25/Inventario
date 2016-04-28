@@ -71,7 +71,7 @@ public class ModeloInventario3 {
 	
 	public double getCantidadOptima()
 	{
-		return x_S;
+		return cantidadOp;
 	}
 	
 	public double getCostoTotal()

@@ -20,12 +20,13 @@ public class ModeloInventario4 {
 		this.cOrdenar = cOrdenar;
 		this.cInventario = cInvetario;
 		this.produccion = produccion;
+		modelo1();
 	}
 	
 	
 	public double cantidadOptima(double demanda_, double cOrdenar_, double cInvetario_,double produccion_)
 	{
-		return Math.sqrt((2*cOrdenar_*demanda_*produccion_)/cInvetario_*(produccion_-demanda_));
+		return Math.sqrt( (2*cOrdenar_*demanda_*produccion_)/(cInvetario_*(produccion_-demanda_)) );
 	}
 	
 	public double inventarioMax(double demanda_, double produccion_, double cantidadOp_)
@@ -35,7 +36,7 @@ public class ModeloInventario4 {
 	
 	public double costoTotal(double cant, double demanda_,double produccion_,  double cOrdenar_, double cInventario_)//dado una cantidad optima determiar el costo total
 	{
-		return (cOrdenar_*demanda_/cant)+(cInventario_*cant*(produccion_- demanda_)/2*produccion_);
+		return  (cOrdenar_*demanda_)/cant + cInventario_*cant*(produccion_- demanda_)/(2*produccion_);
 	}
 	
 	public void modelo1()
@@ -43,6 +44,11 @@ public class ModeloInventario4 {
 		cantidadOp = cantidadOptima(demanda, cOrdenar, cInventario, produccion);
 		invMax = inventarioMax(demanda, produccion, cantidadOp);
 		cTotal = costoTotal(cantidadOp, demanda, produccion, cOrdenar, cInventario);
+		
+		System.out.println(demanda);
+		System.out.println(cOrdenar);
+		System.out.println(cInventario);
+		System.out.println(produccion);
 		
 		frecuencia = cantidadOp/demanda;
 		tasa = demanda/cantidadOp;
