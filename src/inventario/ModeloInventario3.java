@@ -7,6 +7,7 @@ public class ModeloInventario3 {
 	private double cInventario;
 	private double cAgotamiento;
 	
+	private double cantidadOp;
 	private double cTotal;
 	
 	private double frecuencia;
@@ -32,16 +33,24 @@ public class ModeloInventario3 {
 		System.out.println(costoTotal(150));
 	}
 	
-	public double cantidadOptima(double x_L_,double demanda_, double cOrdenar_, double cInventario_)
+	public double cantidadOptima(double demanda_, double cOrdenar_, double cInventario_, double cAgostamiento_)
 	{
-		return Math.sqrt(Math.pow(x_L_, 2) + (2*cOrdenar_*demanda_)/cInventario_);
+		return Math.sqrt( ((cOrdenar_+cInventario_)/cAgostamiento_)*((2*demanda_*cOrdenar_)/cInventario_));
+		//return Math.sqrt(Math.pow(x_L_, 2) + (2*cOrdenar_*demanda_)/cInventario_);
 	}
 	
 	
-	public double costoTotal(double x_L_, double x_S_, double demanda_, double cOrdenar_, double cInventario_, double  cAgotamiento_)
+	public double costoTotal(double x_L_, double x_S_,double cantidadOp_, double demanda_, double cOrdenar_, double cInventario_, double  cAgotamiento_)
 	{
-		//return cOrdenar_*demanda_/+()+();
-		return (cOrdenar_*demanda_)/(x_S_+x_L_)+ (cInventario_*Math.pow(x_S_, 2)/2*(x_L_+x_S_));
+		return cOrdenar_*demanda_/cantidadOp_+cInventario_*Math.pow(x_S_, 2)/2*cantidadOp_ +cAgotamiento_*Math.pow(x_L_, 2)/2*cantidadOp_;
+		//return (cOrdenar_*demanda_)/(x_S_+x_L_)+ (cInventario_*Math.pow(x_S_, 2)/2*(x_L_+x_S_));
+	}
+	
+	
+	public double cantidadOptimaInvetario(double x_L_,double demanda_, double cOrdenar_, double cInventario_)
+	{
+		//return Math.sqrt(2*cOrdenar_*demanda_*x_L_)*Math.sqrt((x_L_+cInventario_)/x_L_);
+		return -x_L_+ Math.sqrt(Math.pow(x_L_, 2) + (2*cOrdenar_*demanda_)/cInventario_);
 	}
 	
 	public double costoTotal(double cant)
@@ -52,10 +61,11 @@ public class ModeloInventario3 {
 	
 	public void modelo1()
 	{
-		x_S = cantidadOptima(x_L,demanda, cOrdenar, cInventario);
-		cTotal =  costoTotal(x_L, x_S, demanda, cOrdenar, cInventario, 0);
-		frecuencia = x_S/demanda;
-		tasa = demanda/x_S;
+		cantidadOp =cantidadOptima(demanda, cOrdenar, cInventario, cAgotamiento);
+		x_S = cantidadOptimaInvetario(x_L, demanda, cOrdenar, cInventario);
+		cTotal =  costoTotal(x_L, x_S, cantidadOp, demanda, cOrdenar, cInventario, cAgotamiento);
+		frecuencia = cantidadOp/demanda;
+		tasa = demanda/cantidadOp;
 	}
 	
 	
