@@ -8,11 +8,12 @@ public class ModeloInventario2 {
 	
 	private double cTotal;
 	private double cantidadOp; //cantidad optima en el inventario
+	private double invMedio; //inventario medio
 	
-	private double frecuencia;
-	private double tasa;
+	private double t;
+	private double f;
 	
-	private double x_L;//Cantidad máxima de unidades en agotamiento
+	private double x_L;//Cantidad mï¿½xima de unidades en agotamiento
 	private double x_S;//Inventario en mano, es decir lo que realmente se tiene.
 	
 	public ModeloInventario2(double x_L, double demanda, double cOrdenar, double cInvetario) {
@@ -22,12 +23,6 @@ public class ModeloInventario2 {
 		this.cInventario = cInvetario;
 		this.x_L = x_L;
 		modelo1();
-		System.out.println("cantidad optima:         "+cantidadOp);
-		System.out.println("nivel maximo inventario: "+x_S);
-		System.out.println("costo total:             "+cTotal);
-		System.out.println(frecuencia);
-		System.out.println(tasa);
-		System.out.println(costoTotal(150));
 	}
 	
 	public double cantidadOptima(double x_L_,double demanda_, double cOrdenar_, double cInventario_)
@@ -60,8 +55,9 @@ public class ModeloInventario2 {
 		cantidadOp = cantidadOptima(x_L,demanda, cOrdenar, cInventario);
 		x_S = cantidadOptimaInvetario(x_L, demanda, cOrdenar, cInventario);
 		cTotal =  costoTotal(x_L, x_S, demanda, cOrdenar, cInventario);
-		frecuencia = x_S/demanda;
-		tasa = demanda/x_S;
+		t = cantidadOp/demanda;
+		f = demanda/cantidadOp;
+		invMedio = cantidadOp/2;
 	}
 	
 	
@@ -74,15 +70,30 @@ public class ModeloInventario2 {
 	{
 		return cTotal;
 	}
-	
+
+	public double getNivelOptimoInventario()
+	{
+		return x_S;
+	}
+
+	public double getTasa()
+	{
+		return t;
+	}
+
 	public double getFrecuencia()
 	{
-		return frecuencia;
+		return f;
 	}
-	
-	public double getcuantasVecesPerdir()
+
+	public double getInventarioMedio()
 	{
-		return tasa;
+		return invMedio;
+	}
+
+	public double getPuntoReorden(double demora)
+	{
+		return t*demora;
 	}
 	
 	

@@ -7,9 +7,10 @@ public class ModeloInventario1 {
 	
 	private double cantidadOp; //cantidad optima en el inventario
 	private double cTotal;
+	private double invMedio; //inventario medio
 	
-	private double frecuencia;
-	private double tasa;
+	private double t; //tasa de consumo
+	private double f; //grecuencia
 	
 	
 	private double cparte1, cparte2;
@@ -20,11 +21,6 @@ public class ModeloInventario1 {
 		this.cOrdenar = cOrdenar;
 		this.cInventario = cInvetario;
 		modelo1();
-		System.out.println("cantidad optima: "+cantidadOp);
-		System.out.println("costo total:     "+cTotal);
-		System.out.println("frecuencia:      "+frecuencia);
-		System.out.println("tasa:            "+tasa);
-		System.out.println(costoTotal(150));
 	}
 	
 	public double cantidadOptima(double demanda_, double cOrdenar_, double cInventario_)
@@ -48,8 +44,9 @@ public class ModeloInventario1 {
 	{
 		cantidadOp = cantidadOptima(demanda, cOrdenar, cInventario);
 		cTotal =  costoTotal(cantidadOp, demanda, cOrdenar, cInventario);
-		frecuencia = cantidadOp/demanda;
-		tasa = demanda/cantidadOp;
+		t = cantidadOp/demanda;
+		f = demanda/cantidadOp;
+		invMedio = cantidadOp/2;
 	}
 	
 	public double getCantidadOptima()
@@ -62,14 +59,14 @@ public class ModeloInventario1 {
 		return cTotal;
 	}
 	
-	public double getFrecuencia()
+	public double getTasa()
 	{
-		return frecuencia;
+		return t;
 	}
 	
-	public double getcuantasVecesPerdir()
+	public double getFrecuencia()
 	{
-		return tasa;
+		return f;
 	}
 	
 	public double getCInventario()
@@ -79,6 +76,16 @@ public class ModeloInventario1 {
 	public double getCOrdenar()
 	{
 		return cparte2;
+	}
+	
+	public double getInventarioMedio()
+	{
+		return invMedio;
+	}
+	
+	public double getPuntoReorden(double demora)
+	{
+		return t*demora;
 	}
 
 }
