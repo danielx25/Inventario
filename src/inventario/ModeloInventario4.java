@@ -10,9 +10,10 @@ public class ModeloInventario4 {
 	private double cantidadOp; //cantidad optima en el inventario
 	private double cTotal;
 	private double invMax; //inventario maximo
+	private double invMedio; //inventario medio
 	
-	private double frecuencia;
-	private double tasa;
+	private double t;
+	private double f;
 	
 	public ModeloInventario4(double demanda, double cOrdenar, double cInvetario,double produccion) {
 		// TODO Auto-generated constructor stub
@@ -50,8 +51,9 @@ public class ModeloInventario4 {
 		System.out.println(cInventario);
 		System.out.println(produccion);
 		
-		frecuencia = cantidadOp/demanda;
-		tasa = demanda/cantidadOp;
+		t = cantidadOp/demanda;
+		f = demanda/cantidadOp;
+		invMedio = cantidadOp/2;
 	}
 	
 	public double getCantidadOptima()
@@ -64,19 +66,31 @@ public class ModeloInventario4 {
 		return cTotal;
 	}
 	
-	public double getFrecuencia()
-	{
-		return frecuencia;
-	}
-	
-	public double getcuantasVecesPerdir()
-	{
-		return tasa;
-	}
-	
 	public double getInvMax()
 	{
 		return invMax;
 	}
+	
+	public double getTasa()
+	{
+		return t;
+	}
+
+	public double getFrecuencia()
+	{
+		return f;
+	}
+
+	public double getInventarioMedio()
+	{
+		return invMedio;
+	}
+
+	public double getPuntoReorden(double demora)
+	{
+		return t*demora;
+	}
+	
+	
 
 }

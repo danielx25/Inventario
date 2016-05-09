@@ -9,9 +9,9 @@ public class ModeloInventario3 {
 	
 	private double cantidadOp;
 	private double cTotal;
-	
-	private double frecuencia;
-	private double tasa;
+	private double invMedio;
+	private double f;
+	private double t;
 	
 	private double x_L;//Cantidad máxima de unidades en agotamiento
 	private double x_S;//Inventario en mano, es decir lo que realmente se tiene.
@@ -28,8 +28,8 @@ public class ModeloInventario3 {
 		modelo1();
 		System.out.println(x_S);
 		System.out.println(cTotal);
-		System.out.println(frecuencia);
-		System.out.println(tasa);
+		System.out.println(f);
+		System.out.println(t);
 		System.out.println(costoTotal(150));
 	}
 	
@@ -64,8 +64,9 @@ public class ModeloInventario3 {
 		cantidadOp =cantidadOptima(demanda, cOrdenar, cInventario, cAgotamiento);
 		x_S = cantidadOptimaInvetario(x_L, demanda, cOrdenar, cInventario);
 		cTotal =  costoTotal(x_L, x_S, cantidadOp, demanda, cOrdenar, cInventario, cAgotamiento);
-		frecuencia = cantidadOp/demanda;
-		tasa = demanda/cantidadOp;
+		t = cantidadOp/demanda;
+		f = demanda/cantidadOp;
+		invMedio = cantidadOp/2;
 	}
 	
 	
@@ -78,15 +79,30 @@ public class ModeloInventario3 {
 	{
 		return cTotal;
 	}
-	
+
+	public double getNivelOptimoInventario()
+	{
+		return x_S;
+	}
+
+	public double getTasa()
+	{
+		return t;
+	}
+
 	public double getFrecuencia()
 	{
-		return frecuencia;
+		return f;
 	}
-	
-	public double getcuantasVecesPerdir()
+
+	public double getInventarioMedio()
 	{
-		return tasa;
+		return invMedio;
+	}
+
+	public double getPuntoReorden(double demora)
+	{
+		return t*demora;
 	}
 
 }
