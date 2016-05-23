@@ -91,6 +91,24 @@ public class ModeloInventario4 {
 		return t*demora;
 	}
 	
-	
+	public double getDemanda()
+	{
+		return demanda;
+	}
+
+	public  double getcOrdenar()
+	{
+		return  cOrdenar;
+	}
+
+	public  double getcInventario()
+	{
+		return  cInventario;
+	}
+
+	public  double getProduccion()
+	{
+		return  produccion;
+	}
 
 }
