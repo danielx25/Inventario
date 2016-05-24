@@ -13,8 +13,10 @@ public class testmain {
 		
 		ModeloInventario4 modelo4 = new ModeloInventario4(40000, 350, 3000, 400000);
 		System.out.println("cantidad optima: "+modelo4.getCantidadOptima());
-		System.out.println(modelo4.getInvMax());
+		System.out.println("inventario maxi: "+modelo4.getInvMax());
 		System.out.println("costo total: "+ modelo4.getCostoTotal());
+		System.out.println("frecuencia: "+modelo4.getFrecuencia());
+		System.out.println("tasa: "+ modelo4.getTasa());
 	}
 
 }
