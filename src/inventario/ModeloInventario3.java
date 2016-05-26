@@ -35,7 +35,7 @@ public class ModeloInventario3 {
 	
 	public double cantidadOptima(double demanda_, double cOrdenar_, double cInventario_, double cAgostamiento_)
 	{
-		return Math.sqrt( ((cOrdenar_+cInventario_)/cAgostamiento_)*((2*demanda_*cOrdenar_)/cInventario_));
+		return Math.sqrt( ((cAgostamiento_+cInventario_)/cAgostamiento_)*((2*demanda_*cOrdenar_)/cInventario_));
 		//return Math.sqrt(Math.pow(x_L_, 2) + (2*cOrdenar_*demanda_)/cInventario_);
 	}
 	
